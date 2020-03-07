@@ -1,6 +1,6 @@
 package settheorylib;
 
-// Used to pass as arguments by allowed caller to pass a llamda expression
+// Used to allow caller to pass functions as arguments
 interface FuncInterface<I, O> {
 	O function(I argument);
 }
