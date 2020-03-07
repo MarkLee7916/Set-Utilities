@@ -8,10 +8,6 @@ import java.util.HashSet;
 import java.util.List;
 
 public class SetUtils {
-	public static void main(String[] args) {
-		System.out.println(cartesianProduct(new HashSet<>(), new HashSet<>()));
-	}
-
 	// Returns the set of all subsets of a given set
 	public static <T> Set<Set<T>> powerSet(Set<T> set) {
 		Set<Set<T>> ret = new HashSet<>(Arrays.asList(new HashSet<>()));
