@@ -25,6 +25,34 @@ public class SetUtils {
 
 		return ret;
 	}
+	
+	// Returns the set of all combinations of a given set
+	public static <T> Set<List<T>> permutationSet(Set<T> set) {
+		// Initialise ret with one arraylist, of which has one element
+		Set<List<T>> removals = new HashSet<>();
+		Set<List<T>> additions = new HashSet<>();
+		Set<List<T>> ret = new HashSet<>();
+
+		ret.add(new ArrayList<>());
+
+		for (T elem : set) {
+			for (List<T> list : ret) {
+				for (int j = 0; j <= list.size(); j++) {
+					List<T> newElem = new ArrayList<>(list);
+					newElem.add(j, elem);
+					additions.add(newElem);
+					removals.add(list);
+				}
+			}
+			ret.addAll(additions);
+			additions.clear();
+
+			ret.removeAll(removals);
+			removals.clear();
+		}
+
+		return ret;
+	}
 
 	@SafeVarargs
 	// Initialises ArrayList with values
@@ -54,52 +82,13 @@ public class SetUtils {
 		return set;
 	}
 
-	// Roughly equivilant to a simple list comprehension in a language like Python
+	// Roughly equivilant to a simple list comprehension in a language like Python or Haskell
 	public static <I, O> List<O> listComp(FuncInterface<I, O> map, List<I> list, FuncInterface<I, Boolean> pred) {
 		List<O> ret = new ArrayList<>();
 
 		for (I elem : list)
 			if (pred.function(elem))
 				ret.add(map.function((elem)));
-
-		return ret;
-	}
-
-	// Roughly equivilant to a simple set comprehension in formal maths
-	public static <I, O> Set<O> setComp(FuncInterface<I, O> map, Set<I> list, FuncInterface<I, Boolean> pred) {
-		Set<O> ret = new HashSet<>();
-
-		for (I elem : list)
-			if (pred.function(elem))
-				ret.add(map.function((elem)));
-
-		return ret;
-	}
-
-	// Returns set of all combinations of a given set
-	public static <T> Set<List<T>> permutationSet(Set<T> set) {
-		// Initialise ret with one arraylist, of which has one element
-		Set<List<T>> removals = new HashSet<>();
-		Set<List<T>> additions = new HashSet<>();
-		Set<List<T>> ret = new HashSet<>();
-
-		ret.add(new ArrayList<>());
-
-		for (T elem : set) {
-			for (List<T> list : ret) {
-				for (int j = 0; j <= list.size(); j++) {
-					List<T> newElem = new ArrayList<>(list);
-					newElem.add(j, elem);
-					additions.add(newElem);
-					removals.add(list);
-				}
-			}
-			ret.addAll(additions);
-			additions.clear();
-
-			ret.removeAll(removals);
-			removals.clear();
-		}
 
 		return ret;
 	}
