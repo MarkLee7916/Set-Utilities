@@ -31,9 +31,7 @@ public class SetUtils {
 		// Initialise ret with one arraylist, of which has one element
 		Set<List<T>> removals = new HashSet<>();
 		Set<List<T>> additions = new HashSet<>();
-		Set<List<T>> ret = new HashSet<>();
-
-		ret.add(new ArrayList<>());
+		Set<List<T>> ret = new HashSet<>(Arrays.asList(new ArrayList<>()));
 
 		for (T elem : set) {
 			for (List<T> list : ret) {
@@ -44,6 +42,7 @@ public class SetUtils {
 					removals.add(list);
 				}
 			}
+			
 			ret.addAll(additions);
 			additions.clear();
 
